@@ -23,4 +23,8 @@
   animation-timing-function: ease-in-out;
 }
 
+.color-circle > div > div {
+  @apply rounded-md;
+}
+
 @tailwind utilities;

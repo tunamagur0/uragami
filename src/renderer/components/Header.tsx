@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
 import { PaintContext } from '../App';
 import PenItem from './PenItem';
 import EraserItem from './EraserItem';
+import PaletteItem from './PaletteItem';
 import {
   IconChevronsDown,
   IconChevronsUp,
   IconPencil,
   IconEraser,
   IconX,
+  IconPalette,
 } from '@tabler/icons';
 
 const Header: React.FC = () => {
@@ -25,33 +27,47 @@ const Header: React.FC = () => {
 
   const items: {
     icon: (color: string) => React.ReactNode;
-    modal: React.ReactNode;
+    modal: (isOpen: boolean) => React.ReactNode;
   }[] = [
     {
       icon: function icon(color) {
         return <IconPencil className="w-12 h-12" stroke={2} color={color} />;
       },
-      modal: (
-        <PenItem
-          close={() => setOpenIndex(-1)}
-          selectTool={() => setCurrentTool(0)}
-          lineWidth={lineWidth}
-          setLineWidth={setLineWidth}
-        />
-      ),
+      modal: function modal(isOpen) {
+        return (
+          <PenItem
+            close={() => setOpenIndex(-1)}
+            selectTool={() => setCurrentTool(0)}
+            isOpen={isOpen}
+            lineWidth={lineWidth}
+            setLineWidth={setLineWidth}
+          />
+        );
+      },
     },
     {
       icon: function icon(color) {
         return <IconEraser className="w-12 h-12" stroke={2} color={color} />;
       },
-      modal: (
-        <EraserItem
-          close={() => setOpenIndex(-1)}
-          selectTool={() => setCurrentTool(1)}
-          lineWidth={lineWidth}
-          setLineWidth={setLineWidth}
-        />
-      ),
+      modal: function modal(isOpen) {
+        return (
+          <EraserItem
+            close={() => setOpenIndex(-1)}
+            selectTool={() => setCurrentTool(1)}
+            isOpen={isOpen}
+            lineWidth={lineWidth}
+            setLineWidth={setLineWidth}
+          />
+        );
+      },
+    },
+    {
+      icon: function icon(color) {
+        return <IconPalette className="w-12 h-12" stroke={2} color={color} />;
+      },
+      modal: function modal(isOpen) {
+        return <PaletteItem close={() => setOpenIndex(-1)} />;
+      },
     },
   ];
 
@@ -63,18 +79,22 @@ const Header: React.FC = () => {
           onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
           key={index}
         >
-          {icon(index < 3 && currentTool === index ? 'red' : 'black')}
+          {icon(index < 2 && currentTool === index ? 'red' : 'black')}
         </button>
       ))}
     </div>
   );
 
-  const item = items.filter((_, index) => index === openIndex);
-  const modal = (
-    <div className="absolute top-0 transform translate-y-24">
-      {item.length !== 0 ? item[0].modal : null}
+  const modals = items.map(({ modal }, index) => (
+    <div
+      className={`absolute top-0 transform translate-y-24 ${
+        index === openIndex ? '' : 'invisible'
+      }`}
+      key={index}
+    >
+      {modal(index === openIndex)}
     </div>
-  );
+  ));
 
   return (
     <div
@@ -82,7 +102,7 @@ const Header: React.FC = () => {
         isOpen ? 'h-20' : 'h-5'
       }`}
     >
-      {modal}
+      {modals}
       <span
         className="absolute right-0 cursor-pointer"
         onClick={() => {

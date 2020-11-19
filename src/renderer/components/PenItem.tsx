@@ -5,6 +5,7 @@ import { IconX } from '@tabler/icons';
 type Props = {
   close: () => void;
   selectTool: () => void;
+  isOpen: boolean;
   setLineWidth: (width: number) => void;
   lineWidth: number;
 };
@@ -12,16 +13,18 @@ type Props = {
 const PenItem: React.FC<Props> = ({
   close,
   selectTool,
+  isOpen,
   setLineWidth,
   lineWidth,
 }: Props) => {
   const context = useContext(PaintContext);
+
   useEffect(() => {
-    if (context.awPaint) {
+    if (isOpen && context.awPaint) {
       context.awPaint.changeMode('Pencil');
       selectTool();
     }
-  }, []);
+  }, [isOpen]);
 
   return (
     <div className="header-item popup">
