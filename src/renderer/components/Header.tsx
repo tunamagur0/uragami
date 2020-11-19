@@ -1,7 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { PaintContext } from '../App';
 import PenItem from './PenItem';
-import { IconChevronsDown, IconChevronsUp, IconPencil } from '@tabler/icons';
+import {
+  IconChevronsDown,
+  IconChevronsUp,
+  IconPencil,
+  IconEraser,
+  IconX,
+} from '@tabler/icons';
 
 const Header: React.FC = () => {
   const context = useContext(PaintContext);
@@ -20,7 +26,11 @@ const Header: React.FC = () => {
   }[] = [
     {
       icon: <IconPencil className="w-12 h-12" stroke={2} />,
-      modal: <PenItem />,
+      modal: <PenItem close={() => setOpenIndex(-1)} />,
+    },
+    {
+      icon: <IconEraser className="w-12 h-12" stroke={2} />,
+      modal: <PenItem close={() => setOpenIndex(-1)} />,
     },
   ];
 
@@ -29,7 +39,7 @@ const Header: React.FC = () => {
       {items.map(({ icon }, index) => (
         <button
           className="p-2"
-          onClick={() => setOpenIndex(openIndex === -1 ? index : -1)}
+          onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
           key={index}
         >
           {icon}
@@ -40,7 +50,7 @@ const Header: React.FC = () => {
 
   const item = items.filter((_, index) => index === openIndex);
   const modal = (
-    <div className="absolute top-0 transform translate-y-24 transition-all duration-100">
+    <div className="absolute top-0 transform translate-y-24">
       {item.length !== 0 ? item[0].modal : null}
     </div>
   );
@@ -58,20 +68,7 @@ const Header: React.FC = () => {
           (window as any).api.closeWindow();
         }}
       >
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M6 18L18 6M6 6l12 12"
-          ></path>
-        </svg>
+        <IconX className="w-5 h-5" />
       </span>
       {isOpen ? menu : null}
       <div
