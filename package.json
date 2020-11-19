@@ -19,6 +19,7 @@
   "dependencies": {
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
+    "anywhere-paint": "tunamagur0/anywhere-paint#develop",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },

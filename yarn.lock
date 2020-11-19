@@ -598,6 +598,10 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
+anywhere-paint@tunamagur0/anywhere-paint#develop:
+  version "1.0.1"
+  resolved "https://codeload.github.com/tunamagur0/anywhere-paint/tar.gz/5dc62917d9e26e815bc1981a4516ed8bc983073d"
+
 argparse@^1.0.7:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
