@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { PaintContext } from '../App';
 import PenItem from './PenItem';
+import EraserItem from './EraserItem';
 import {
   IconChevronsDown,
   IconChevronsUp,
@@ -13,6 +14,8 @@ const Header: React.FC = () => {
   const context = useContext(PaintContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [openIndex, setOpenIndex] = useState<number>(-1);
+  const [currentTool, setCurrentTool] = useState<number>(0);
+  const [lineWidth, setLineWidth] = useState<number>(10);
 
   const icon = isOpen ? (
     <IconChevronsUp stroke={2} />
@@ -21,16 +24,34 @@ const Header: React.FC = () => {
   );
 
   const items: {
-    icon: React.ReactNode;
+    icon: (color: string) => React.ReactNode;
     modal: React.ReactNode;
   }[] = [
     {
-      icon: <IconPencil className="w-12 h-12" stroke={2} />,
-      modal: <PenItem close={() => setOpenIndex(-1)} />,
+      icon: function icon(color) {
+        return <IconPencil className="w-12 h-12" stroke={2} color={color} />;
+      },
+      modal: (
+        <PenItem
+          close={() => setOpenIndex(-1)}
+          selectTool={() => setCurrentTool(0)}
+          lineWidth={lineWidth}
+          setLineWidth={setLineWidth}
+        />
+      ),
     },
     {
-      icon: <IconEraser className="w-12 h-12" stroke={2} />,
-      modal: <PenItem close={() => setOpenIndex(-1)} />,
+      icon: function icon(color) {
+        return <IconEraser className="w-12 h-12" stroke={2} color={color} />;
+      },
+      modal: (
+        <EraserItem
+          close={() => setOpenIndex(-1)}
+          selectTool={() => setCurrentTool(1)}
+          lineWidth={lineWidth}
+          setLineWidth={setLineWidth}
+        />
+      ),
     },
   ];
 
@@ -42,7 +63,7 @@ const Header: React.FC = () => {
           onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
           key={index}
         >
-          {icon}
+          {icon(index < 3 && currentTool === index ? 'red' : 'black')}
         </button>
       ))}
     </div>

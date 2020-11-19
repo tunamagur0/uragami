@@ -9,7 +9,7 @@ type Props = {
   lineWidth: number;
 };
 
-const PenItem: React.FC<Props> = ({
+const EraserItem: React.FC<Props> = ({
   close,
   selectTool,
   setLineWidth,
@@ -18,7 +18,7 @@ const PenItem: React.FC<Props> = ({
   const context = useContext(PaintContext);
   useEffect(() => {
     if (context.awPaint) {
-      context.awPaint.changeMode('Pencil');
+      context.awPaint.changeMode('Eraser');
       selectTool();
     }
   }, []);
@@ -31,7 +31,7 @@ const PenItem: React.FC<Props> = ({
       >
         <IconX className="w-5 h-5" />
       </span>
-      <p>ペンの太さ</p>
+      <p>消しゴムの太さ</p>
       <input
         className="w-64"
         type="range"
@@ -52,4 +52,4 @@ const PenItem: React.FC<Props> = ({
   );
 };
 
-export default PenItem;
+export default EraserItem;
