@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './tailwind.css';
-import Paint from './components/Paint';
+import App from './App';
 
 const container = document.getElementById('app');
 
-ReactDOM.render(<Paint />, container);
+ReactDOM.render(<App />, container);

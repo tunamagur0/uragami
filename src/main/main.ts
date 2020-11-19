@@ -43,3 +43,7 @@ app.on('activate', () => {
 ipcMain.handle('getBounds', () => {
   return screen.getPrimaryDisplay().bounds;
 });
+
+ipcMain.handle('closeWindow', () => {
+  app.exit(0);
+});

@@ -1,24 +1,22 @@
 import AnywherePaint from 'anywhere-paint';
-import React, { useEffect, useRef } from 'react';
-const context: { awPaint: AnywherePaint | null } = {
-  awPaint: null,
-};
-
-export const PaintContext = React.createContext<typeof context>(context);
+import React, { useContext, useEffect, useRef } from 'react';
+import { PaintContext } from '../App';
 
 const Paint: React.FC = () => {
+  const context = useContext(PaintContext);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const init = async () => {
       const { width, height } = await (window as any).api.getBounds();
-      console.log(width, height);
       if (ref.current) {
         context.awPaint = new AnywherePaint(
           ref.current as HTMLDivElement,
           width,
           height
         );
+        context.awPaint.setColor(255, 0, 0);
+        context.awPaint.setLineWidth(10);
       }
     };
 
@@ -30,13 +28,14 @@ const Paint: React.FC = () => {
   }, []);
 
   return (
-    <PaintContext.Provider value={context}>
-      <div className="w-screen h-screen overflow-hidden">
-        <div className="flex w-full h-full justify-center items-center">
-          <div className="bg-gray-300 w-full h-full" ref={ref}></div>
-        </div>
+    <div className="w-screen h-screen overflow-hidden">
+      <div className="flex w-full h-full justify-center items-center">
+        <div
+          className="bg-gray-900 bg-opacity-40 w-full h-full"
+          ref={ref}
+        ></div>
       </div>
-    </PaintContext.Provider>
+    </div>
   );
 };
 

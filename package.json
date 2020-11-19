@@ -2,7 +2,7 @@
   "name": "rakugaki",
   "version": "0.0.1",
   "description": "desktop drawing tool",
-  "main": "main.js",
+  "main": "dist/main/main.js",
   "author": "tunamagur0",
   "license": "MIT",
   "scripts": {
@@ -14,9 +14,12 @@
     "build": "npm-run-all build:electron build:react",
     "build:run": "npm-run-all build start:electron",
     "build:electron": "cross-env NODE_ENV=production tsc",
-    "build:react": "cross-env NODE_ENV=production webpack"
+    "build:react": "cross-env NODE_ENV=production webpack",
+    "pack:mac": "yarn build && electron-builder --mac --x64 --dir",
+    "pack:win": "yarn build && electron-builder --win --x64 --dir"
   },
   "dependencies": {
+    "@tabler/icons": "^1.36.0",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
     "anywhere-paint": "tunamagur0/anywhere-paint#develop",
@@ -31,6 +34,7 @@
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.1",
     "electron": "^11.0.1",
+    "electron-builder": "^22.9.1",
     "eslint": "^7.13.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-loader": "^4.0.2",
@@ -50,5 +54,17 @@
     "webpack": "^5.5.1",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
+  },
+  "build": {
+    "extraMetadata": {
+      "main": "./dist/main/main.js"
+    },
+    "files": [
+      "./dist/main/*",
+      "./dist/renderer/*"
+    ],
+    "directories": {
+      "output": "./dist/release"
+    }
   }
 }
