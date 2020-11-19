@@ -1,4 +1,5 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, ipcMain, screen } from 'electron';
+import path from 'path';
 
 const createWindow = (): void => {
   const size = screen.getPrimaryDisplay().size;
@@ -13,6 +14,7 @@ const createWindow = (): void => {
       nodeIntegration: false,
       nodeIntegrationInWorker: false,
       contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js'),
     },
   });
 
@@ -36,4 +38,8 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+ipcMain.handle('getBounds', () => {
+  return screen.getPrimaryDisplay().bounds;
 });

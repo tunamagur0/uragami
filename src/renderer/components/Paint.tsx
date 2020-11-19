@@ -5,20 +5,24 @@ const context: { awPaint: AnywherePaint | null } = {
 };
 
 export const PaintContext = React.createContext<typeof context>(context);
-const width = 640;
-const height = 480;
 
 const Paint: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (ref.current) {
-      context.awPaint = new AnywherePaint(
-        ref.current as HTMLDivElement,
-        width,
-        height
-      );
-    }
+    const init = async () => {
+      const { width, height } = await (window as any).api.getBounds();
+      console.log(width, height);
+      if (ref.current) {
+        context.awPaint = new AnywherePaint(
+          ref.current as HTMLDivElement,
+          width,
+          height
+        );
+      }
+    };
+
+    init();
 
     return () => {
       context.awPaint = null;
@@ -27,13 +31,9 @@ const Paint: React.FC = () => {
 
   return (
     <PaintContext.Provider value={context}>
-      <div className="w-full h-full">
+      <div className="w-screen h-screen overflow-hidden">
         <div className="flex w-full h-full justify-center items-center">
-          <div
-            className="bg-white border-blue-600 border"
-            style={{ width: width, height: height }}
-            ref={ref}
-          ></div>
+          <div className="bg-gray-300 w-full h-full" ref={ref}></div>
         </div>
       </div>
     </PaintContext.Provider>
