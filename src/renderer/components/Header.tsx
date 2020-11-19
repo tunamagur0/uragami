@@ -3,6 +3,7 @@ import { PaintContext } from '../App';
 import PenItem from './PenItem';
 import EraserItem from './EraserItem';
 import PaletteItem from './PaletteItem';
+import DownloadItem from './DownloadItem';
 import {
   IconChevronsDown,
   IconChevronsUp,
@@ -10,6 +11,10 @@ import {
   IconEraser,
   IconX,
   IconPalette,
+  IconArrowBackUp,
+  IconArrowForwardUp,
+  IconLoader,
+  IconFileDownload,
 } from '@tabler/icons';
 
 const Header: React.FC = () => {
@@ -65,8 +70,75 @@ const Header: React.FC = () => {
       icon: function icon(color) {
         return <IconPalette className="w-12 h-12" stroke={2} color={color} />;
       },
-      modal: function modal(isOpen) {
+      modal: function modal() {
         return <PaletteItem close={() => setOpenIndex(-1)} />;
+      },
+    },
+    {
+      icon: function icon(color) {
+        return (
+          <IconArrowBackUp
+            className="w-12 h-12"
+            stroke={2}
+            color={color}
+            onClick={() => {
+              if (context.awPaint) {
+                context.awPaint.undo();
+              }
+            }}
+          />
+        );
+      },
+      modal: function modal() {
+        return null;
+      },
+    },
+    {
+      icon: function icon(color) {
+        return (
+          <IconArrowForwardUp
+            className="w-12 h-12"
+            stroke={2}
+            color={color}
+            onClick={() => {
+              if (context.awPaint) {
+                context.awPaint.redo();
+              }
+            }}
+          />
+        );
+      },
+      modal: function modal() {
+        return null;
+      },
+    },
+    {
+      icon: function icon(color) {
+        return (
+          <IconLoader
+            className="w-12 h-12"
+            stroke={2}
+            color={color}
+            onClick={() => {
+              if (context.awPaint) {
+                context.awPaint.clearLayer(context.awPaint.selectingLayer);
+              }
+            }}
+          />
+        );
+      },
+      modal: function modal() {
+        return null;
+      },
+    },
+    {
+      icon: function icon(color) {
+        return (
+          <IconFileDownload className="w-12 h-12" stroke={2} color={color} />
+        );
+      },
+      modal: function modal() {
+        return <DownloadItem close={() => setOpenIndex(-1)} />;
       },
     },
   ];

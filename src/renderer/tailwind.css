@@ -27,4 +27,8 @@
   @apply rounded-md;
 }
 
+.btn {
+  @apply bg-blue-500 hover:bg-blue-700 rounded-lg p-2 m-2 focus:outline-none focus:ring focus:border-white;
+}
+
 @tailwind utilities;

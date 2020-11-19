@@ -10,7 +10,6 @@ const PaletteItem: React.FC<Props> = ({ close }: Props) => {
   const context = useContext(PaintContext);
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    console.log(context, ref);
     if (context.awPaint && ref.current) {
       context.awPaint.createColorCircle(ref.current);
     }
