@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const mode = process.env.NODE_ENV | 'development';
 
 module.exports = {
@@ -15,6 +16,19 @@ module.exports = {
   // ファイルタイプ毎の処理を記述する
   module: {
     rules: [
+      {
+        test: /\.css/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: path.join(__dirname, 'dist', 'renderer'),
+            },
+          },
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          { loader: 'postcss-loader' },
+        ],
+      },
       {
         test: /\.tsx?$/,
         enforce: 'pre',
@@ -41,6 +55,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './dist/renderer/index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
     }),
   ],
 };

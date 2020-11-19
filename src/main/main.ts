@@ -1,10 +1,14 @@
-import { app, BrowserWindow } from 'electron';
-import path from 'path';
+import { app, BrowserWindow, screen } from 'electron';
 
 const createWindow = (): void => {
+  const size = screen.getPrimaryDisplay().size;
   const win = new BrowserWindow({
-    width: 1200,
-    height: 600,
+    width: size.width,
+    height: size.height,
+    frame: false,
+    show: true,
+    transparent: true,
+    resizable: false,
     webPreferences: {
       nodeIntegration: false,
       nodeIntegrationInWorker: false,
