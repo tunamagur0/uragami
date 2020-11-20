@@ -1,5 +1,5 @@
 {
-  "name": "rakugaki",
+  "name": "uragami",
   "version": "0.0.1",
   "description": "desktop drawing tool",
   "main": "dist/main/main.js",
@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "npm-run-all -p dev:react electron:serve",
-    "dev:electron": "cross-env NODE_ENV=development tsc && yarn start:electron",
+    "dev:electron": "cross-env NODE_ENV=development tsc && cross-env NODE_ENV=development yarn start:electron",
     "dev:react": "cross-env NODE_ENV=development webpack serve",
     "electron:serve": "wait-on http-get://localhost:4000/ && yarn dev:electron",
     "start:electron": "electron ./dist/main/main.js",
@@ -16,13 +16,15 @@
     "build:electron": "cross-env NODE_ENV=production tsc",
     "build:react": "cross-env NODE_ENV=production webpack",
     "pack:mac": "yarn build && electron-builder --mac --x64 --dir",
-    "pack:win": "yarn build && electron-builder --win --x64 --dir"
+    "pack:win": "yarn build && electron-builder --win --x64 --dir",
+    "dist:mac": "yarn build && electron-builder --mac --x64",
+    "dist:win": "yarn build && electron-builder --win --x64"
   },
   "dependencies": {
     "@tabler/icons": "^1.36.0",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
-    "anywhere-paint": "tunamagur0/anywhere-paint#develop",
+    "anywhere-paint": "git://github.com/tunamagur0/anywhere-paint#develop",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
@@ -56,6 +58,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "build": {
+    "appId": "io.github.tunamagur0.uragami",
     "extraMetadata": {
       "main": "./dist/main/main.js"
     },
@@ -63,6 +66,20 @@
       "./dist/main/*",
       "./dist/renderer/*"
     ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
     "directories": {
       "output": "./dist/release"
     }

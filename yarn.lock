@@ -647,9 +647,9 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-anywhere-paint@tunamagur0/anywhere-paint#develop:
+"anywhere-paint@git://github.com/tunamagur0/anywhere-paint#develop":
   version "1.0.1"
-  resolved "https://codeload.github.com/tunamagur0/anywhere-paint/tar.gz/5dc62917d9e26e815bc1981a4516ed8bc983073d"
+  resolved "git://github.com/tunamagur0/anywhere-paint#b4014f8fe35321ed83462b72c8ff0210610ebf91"
 
 app-builder-bin@3.5.10:
   version "3.5.10"

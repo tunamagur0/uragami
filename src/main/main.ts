@@ -18,11 +18,11 @@ const createWindow = (): void => {
     },
   });
 
-  if (process.env.NODE_ENV === 'production') {
-    win.loadFile('../renderer/index.html');
-  } else {
+  if (process.env.NODE_ENV === 'development') {
     win.loadURL('http://localhost:4000');
     win.webContents.openDevTools();
+  } else {
+    win.loadFile(path.join(__dirname, '../renderer/index.html'));
   }
 };
 
