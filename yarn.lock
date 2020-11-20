@@ -649,7 +649,7 @@ anymatch@^2.0.0:
 
 "anywhere-paint@git://github.com/tunamagur0/anywhere-paint#develop":
   version "1.0.1"
-  resolved "git://github.com/tunamagur0/anywhere-paint#b4014f8fe35321ed83462b72c8ff0210610ebf91"
+  resolved "git://github.com/tunamagur0/anywhere-paint#fc47f020eb90e7e365852cb204b9ee7ac75e3767"
 
 app-builder-bin@3.5.10:
   version "3.5.10"
