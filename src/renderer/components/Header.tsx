@@ -25,9 +25,9 @@ const Header: React.FC = () => {
   const [lineWidth, setLineWidth] = useState<number>(10);
 
   const icon = isOpen ? (
-    <IconChevronsUp stroke={2} />
+    <IconChevronsUp className="w-5 h-5" stroke={2} />
   ) : (
-    <IconChevronsDown stroke={2} />
+    <IconChevronsDown className="w-5 h-5" stroke={2} />
   );
 
   const items: {
@@ -191,15 +191,7 @@ const Header: React.FC = () => {
           setIsOpen(!isOpen);
         }}
       >
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {icon}
-        </svg>
+        {icon}
       </div>
     </div>
   );

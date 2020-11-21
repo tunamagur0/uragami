@@ -1,2 +1,4 @@
 node_modules
-dist/
+dist/main
+dist/release
+dist/renderer

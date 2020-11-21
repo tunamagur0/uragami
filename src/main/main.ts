@@ -16,6 +16,7 @@ const createWindow = (): void => {
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js'),
     },
+    icon: path.join(__dirname, '../icons/png/1024x1024.png'),
   });
 
   if (process.env.NODE_ENV === 'development') {
@@ -27,6 +28,7 @@ const createWindow = (): void => {
 };
 
 app.whenReady().then(createWindow);
+app.commandLine.appendSwitch('disable-pinch');
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

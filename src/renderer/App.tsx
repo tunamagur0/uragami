@@ -15,7 +15,7 @@ const App: React.FC = () => {
       <div className="w-screen h-screen">
         <Header />
         <Paint />
-      </div>{' '}
+      </div>
     </PaintContext.Provider>
   );
 };

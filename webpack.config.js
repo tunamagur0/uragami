@@ -13,7 +13,6 @@ module.exports = {
     path: path.join(__dirname, 'dist', 'renderer'),
     filename: 'bundle.js',
   },
-  // ファイルタイプ毎の処理を記述する
   module: {
     rules: [
       {
@@ -36,7 +35,6 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        // ローダーの指定
         use: 'ts-loader',
       },
     ],
