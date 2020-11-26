@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PaintContext } from '../App';
 import { IconX } from '@tabler/icons';
 
@@ -6,22 +6,16 @@ type Props = {
   close: () => void;
   selectTool: () => void;
   isOpen: boolean;
-  setLineWidth: (width: number) => void;
-  lineWidth: number;
 };
 
-const PenItem: React.FC<Props> = ({
-  close,
-  selectTool,
-  isOpen,
-  setLineWidth,
-  lineWidth,
-}: Props) => {
+const PenItem: React.FC<Props> = ({ close, selectTool, isOpen }: Props) => {
   const context = useContext(PaintContext);
+  const [lineWidth, setLineWidth] = useState<number>(10);
 
   useEffect(() => {
     if (isOpen && context.awPaint) {
       context.awPaint.changeMode('Pencil');
+      context.awPaint.setLineWidth(lineWidth);
       selectTool();
     }
   }, [isOpen]);

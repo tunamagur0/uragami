@@ -42,10 +42,13 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.handle('getBounds', () => {
-  return screen.getPrimaryDisplay().bounds;
-});
+ipcMain.handle(
+  'getBounds',
+  (): Electron.Rectangle => {
+    return screen.getPrimaryDisplay().bounds;
+  }
+);
 
-ipcMain.handle('closeWindow', () => {
+ipcMain.handle('closeWindow', (): void => {
   app.exit(0);
 });

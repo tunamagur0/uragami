@@ -22,7 +22,6 @@ const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [openIndex, setOpenIndex] = useState<number>(-1);
   const [currentTool, setCurrentTool] = useState<number>(0);
-  const [lineWidth, setLineWidth] = useState<number>(10);
 
   const icon = isOpen ? (
     <IconChevronsUp className="w-5 h-5" stroke={2} />
@@ -44,8 +43,6 @@ const Header: React.FC = () => {
             close={() => setOpenIndex(-1)}
             selectTool={() => setCurrentTool(0)}
             isOpen={isOpen}
-            lineWidth={lineWidth}
-            setLineWidth={setLineWidth}
           />
         );
       },
@@ -60,8 +57,6 @@ const Header: React.FC = () => {
             close={() => setOpenIndex(-1)}
             selectTool={() => setCurrentTool(1)}
             isOpen={isOpen}
-            lineWidth={lineWidth}
-            setLineWidth={setLineWidth}
           />
         );
       },
