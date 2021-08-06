@@ -138,8 +138,8 @@ const Header: React.FC = () => {
     },
   ];
 
-  const menu = (
-    <div className="flex flex-row flex-1 pl-2">
+  const menu = (isOpen: boolean) => (
+    <div className={`flex flex-row flex-1 pl-2 ${isOpen ? '' : 'hidden'}`}>
       {items.map(({ icon }, index) => (
         <button
           className="p-2"
@@ -178,7 +178,7 @@ const Header: React.FC = () => {
       >
         <IconX className="w-5 h-5" />
       </span>
-      {isOpen ? menu : null}
+      {menu(isOpen)}
       <div
         className="w-full flex justify-center cursor-pointer"
         onClick={() => {
