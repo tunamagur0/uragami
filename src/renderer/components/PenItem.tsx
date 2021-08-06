@@ -16,6 +16,7 @@ const PenItem: React.FC<Props> = ({ close, selectTool, isOpen }: Props) => {
     if (isOpen && context.awPaint) {
       context.awPaint.changeMode('Pencil');
       context.awPaint.setLineWidth(lineWidth);
+      context.setCursorSize(lineWidth);
       selectTool();
     }
   }, [isOpen]);
@@ -23,7 +24,7 @@ const PenItem: React.FC<Props> = ({ close, selectTool, isOpen }: Props) => {
   return (
     <div className="header-item popup">
       <span
-        className="absolute right-0 cursor-pointer mr-2 -mt-2 z-10"
+        className="absolute right-0 cursor-pointer mr-2 -mt-2 z-50"
         onClick={close}
       >
         <IconX className="w-5 h-5" />
@@ -37,6 +38,7 @@ const PenItem: React.FC<Props> = ({ close, selectTool, isOpen }: Props) => {
             const width = parseInt(e.target.value);
             setLineWidth(width);
             context.awPaint.setLineWidth(width);
+            context.setCursorSize(width);
           }
         }}
         value={lineWidth}

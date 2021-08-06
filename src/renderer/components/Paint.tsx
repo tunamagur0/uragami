@@ -10,13 +10,14 @@ const Paint: React.FC = () => {
     const init = async () => {
       const { width, height } = await (window as any).api.getBounds();
       if (ref.current) {
-        context.awPaint = new AnywherePaint(
+        const awPaint = new AnywherePaint(
           ref.current as HTMLDivElement,
           width,
           height
         );
-        context.awPaint.setColor(255, 0, 0);
-        context.awPaint.setLineWidth(10);
+        context.setAwPaint(awPaint);
+        awPaint.setColor(255, 0, 0);
+        awPaint.setLineWidth(10);
       }
     };
 
@@ -29,7 +30,10 @@ const Paint: React.FC = () => {
 
   return (
     <div className="w-screen h-screen overflow-hidden">
-      <div className="flex w-full h-full justify-center items-center">
+      <div
+        className="flex w-full h-full justify-center items-center none"
+        style={{ cursor: 'none' }}
+      >
         <div
           className={`bg-gray-900 bg-opacity-${context.opacity} w-full h-full`}
           ref={ref}

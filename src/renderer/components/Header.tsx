@@ -177,7 +177,7 @@ const Header: React.FC = () => {
 
   return (
     <div
-      className={`w-screen overflow-visible bg-gray-100 fixed z-10 flex flex-col transition-all duration-100 ${
+      className={`w-screen overflow-visible bg-gray-100 fixed z-50 flex flex-col transition-all duration-100 ${
         isOpen ? 'h-20' : 'h-5'
       }`}
     >
