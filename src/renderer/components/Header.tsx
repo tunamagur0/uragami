@@ -4,6 +4,7 @@ import PenItem from './PenItem';
 import EraserItem from './EraserItem';
 import PaletteItem from './PaletteItem';
 import DownloadItem from './DownloadItem';
+import OpacityItem from './OpacityItem';
 import {
   IconChevronsDown,
   IconChevronsUp,
@@ -15,6 +16,7 @@ import {
   IconArrowForwardUp,
   IconLoader,
   IconFileDownload,
+  IconBrightness,
 } from '@tabler/icons';
 
 const Header: React.FC = () => {
@@ -124,6 +126,16 @@ const Header: React.FC = () => {
       },
       modal: function modal() {
         return null;
+      },
+    },
+    {
+      icon: function icon(color) {
+        return (
+          <IconBrightness className="w-12 h-12" stroke={2} color={color} />
+        );
+      },
+      modal: function modal() {
+        return <OpacityItem close={() => setOpenIndex(-1)} />;
       },
     },
     {

@@ -31,7 +31,7 @@ const Paint: React.FC = () => {
     <div className="w-screen h-screen overflow-hidden">
       <div className="flex w-full h-full justify-center items-center">
         <div
-          className="bg-gray-900 bg-opacity-40 w-full h-full"
+          className={`bg-gray-900 bg-opacity-${context.opacity} w-full h-full`}
           ref={ref}
         ></div>
       </div>
