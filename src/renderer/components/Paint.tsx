@@ -27,7 +27,6 @@ const Paint: React.FC = () => {
       context.awPaint = null;
     };
   }, []);
-
   return (
     <div className="w-screen h-screen overflow-hidden">
       <div
@@ -37,7 +36,7 @@ const Paint: React.FC = () => {
         <div
           className={`bg-gray-900 bg-opacity-${context.opacity} w-full h-full`}
           ref={ref}
-        ></div>
+        />
       </div>
     </div>
   );

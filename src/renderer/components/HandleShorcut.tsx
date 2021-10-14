@@ -27,7 +27,7 @@ const HandleShortcut: React.FC = () => {
 
   useEffect(() => {
     handleFunc();
-  }, []);
+  }, [context.awPaint]);
   return null;
 };
 
