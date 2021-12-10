@@ -1,6 +1,6 @@
 {
   "name": "uragami",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "desktop drawing tool",
   "main": "dist/main/main.js",
   "author": "tunamagur0 <tsunamaguro3@gmail.com>",
