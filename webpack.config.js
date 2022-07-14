@@ -35,7 +35,10 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: {
+          loader: 'ts-loader',
+          options: { configFile: 'renderer.tsconfig.json' },
+        },
       },
     ],
   },
