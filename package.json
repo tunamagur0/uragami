@@ -16,9 +16,13 @@
     "build:electron": "cross-env NODE_ENV=production tsc",
     "build:react": "cross-env NODE_ENV=production webpack",
     "pack:mac": "yarn build && electron-builder --mac --x64 --dir",
+    "pack:mac-arm64": "yarn build && electron-builder --mac --arm64 --dir",
+    "pack:mac-universal": "yarn build && electron-builder --mac --universal --dir",
     "pack:win": "yarn build && electron-builder --win --x64 --dir",
     "dist": "yarn build && electron-builder",
     "dist:mac": "yarn build && electron-builder --mac --x64",
+    "dist:mac-arm64": "yarn build && electron-builder --mac --arm64",
+    "dist:mac-universal": "yarn build && electron-builder --mac --universal",
     "dist:win": "yarn build && electron-builder --win --x64",
     "dist:linux": "yarn build && electron-builder --linux --x64"
   },
@@ -39,7 +43,7 @@
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.1",
     "electron": "^11.0.1",
-    "electron-builder": "^22.9.1",
+    "electron-builder": "^23.3.1",
     "eslint": "^7.13.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-loader": "^4.0.2",
@@ -73,7 +77,13 @@
     "mac": {
       "icon": "dist/icons/mac/icon.icns",
       "target": [
-        "dmg"
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
       ],
       "category": "public.app-category.utilities"
     },
